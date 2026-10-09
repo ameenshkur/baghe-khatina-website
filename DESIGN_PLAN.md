@@ -1,10 +1,10 @@
 # Baghe Khatina — implemented design direction
 
-The company profile uses a light editorial composition with magenta headings and blush expertise and contact sections. The actual company mark appears on light backgrounds, preserving its supplied PNG artwork.
+The opening pairs a deep pink company panel with edge-to-edge retail photography. A pale footer strip carries the company's activities and an animated down arrow into the profile. The following sections use a light editorial composition with magenta headings and blush expertise and contact sections. The actual company mark appears on light backgrounds, preserving its supplied PNG artwork.
 
 ## Page sequence
 
-1. Company proposition and real Baghe Khatina/Flormar storefront photography.
+1. A full-width company proposition and Baghe Khatina/Flormar store photograph, with direct routes to brands, partnerships and the company story.
 2. Baghdad origin and concise company background.
 3. Three visible capabilities: representation, distribution and retail.
 4. Nine international brand identities with descriptions of their products and relationship to the company, followed by Barbara and Lazurde as company lines.
@@ -13,7 +13,7 @@ The company profile uses a light editorial composition with magenta headings and
 
 ## Typography and proportions
 
-Alexandria remains the copy and interface font. English headings use Onest; Arabic headings use El Messiri. Large display text is reserved for the opening and section headings. Body copy, captions and navigation have separate readable scales. The company section label sits directly above its heading, removing the empty side column.
+Alexandria is used for copy, interface text and Arabic headings. English headings use Onest. Large display text is reserved for the opening and section headings. Body copy, captions and navigation have separate readable scales. The company section label sits directly above its heading, removing the empty side column.
 
 The content column is capped at 1280px. Logical properties adapt alignment and spacing for Arabic. Photo proportions, heading line breaks, logo sizes and responsive stacking are deliberately controlled.
 

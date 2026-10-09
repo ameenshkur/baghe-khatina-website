@@ -97,7 +97,7 @@ if ('IntersectionObserver' in window) {
       observer.unobserve(entry.target);
     });
   }, { threshold: 0.12 });
-  document.querySelectorAll('[data-reveal], .hero-intro').forEach(element => observer.observe(element));
+  document.querySelectorAll('[data-reveal]').forEach(element => observer.observe(element));
 }
 motionPreference.addEventListener('change', event => {
   if (event.matches) activeAnimations.forEach(animation => animation.cancel());
@@ -110,7 +110,7 @@ let scheduled = false;
 function updateCurrentSection() {
   scheduled = false;
   const readingLine = document.querySelector('.site-header').offsetHeight + Math.min(180, innerHeight * .22);
-  let current = null;
+  let current = sections[0]?.id || null;
   sections.forEach(section => {
     if (section.getBoundingClientRect().top <= readingLine) current = section.id;
   });

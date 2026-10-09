@@ -5,7 +5,8 @@ English and Arabic static company website. Open `index.html` or `ar.html`, or pr
 ## Design and identity
 
 - Actual company PNG from the employee arrival app, proportionally resized for web use and displayed without shadows, outlines, recoloring or inversion. The favicon and Apple icon use that same artwork.
-- Alexandria for copy and interface text. [Onest](https://fonts.google.com/specimen/Onest) for English headings; [El Messiri](https://fonts.google.com/specimen/El+Messiri) for Arabic headings. Both downloaded from the official Google Fonts repository; all fonts and licenses are local.
+- [Alexandria](https://fonts.google.com/specimen/Alexandria) for copy, interface text and Arabic headings. [Onest](https://fonts.google.com/specimen/Onest) for English headings. All fonts and licenses are local.
+- A full-width opening pairs a deep pink company panel with actual store photography. Two direct calls to action lead to brands and partnerships; a company-specific down arrow leads into the profile. Home appears in both navigation menus and participates in active section tracking.
 - Magenta display accents, blush expertise and contact sections, all six store photos from the profile, and a clean partner wall with individual brand and relationship descriptions.
 - No partner filters, tabbed business panels, invented monograms, generic model images or animated statistics.
 - Logical layout properties, mirrored directional arrows, keyboard-accessible menus and reduced-motion behavior.
@@ -47,7 +48,9 @@ Original SVGs for Vagheggi, Urban Care, Paris Bleu, Barbara and Lazurde would im
 
 ## Local review
 
-The latest revision was checked in both languages at 320, 375, 768, 1024 and 1440px, with screenshots reviewed at mobile and desktop sizes. No horizontal overflow, overflowing headings or missing images. The correct fonts load in each language. Arabic headings have no clipping mask; their whole lines fade and move into view, preserving diacritics. Contact navigation remains active and reduced motion leaves no running animations. JavaScript syntax and Git whitespace checks pass.
+The opening redesign was checked in both languages at 320, 375, 821, 1024 and 1440px, with screenshots reviewed at mobile and desktop sizes. No horizontal overflow or overflowing hero headings. Home highlights on entry; the down arrow moves to Company and updates the active section. Arabic headings have no clipping mask; their whole lines fade and move into view, preserving diacritics. Reduced motion leaves no running animations. JavaScript syntax and Git whitespace checks pass.
+
+The opening references the prominent imagery and short brand positioning of [Puig](https://www.puig.com/en/) and [cosnova](https://www.cosnova.com/en/). The down-arrow motion takes inspiration from the portfolio's scroll cue, with the company palette, an integrated label and a native anchor. The arrow moves for three cycles rather than indefinitely.
 
 ## Motion and contact sources
 
