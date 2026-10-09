@@ -5,7 +5,7 @@ English and Arabic static company website. Open `index.html` or `ar.html`, or pr
 ## Design and identity
 
 - Actual company PNG from the employee arrival app, proportionally resized for web use and displayed without shadows, outlines, recoloring or inversion. The favicon and Apple icon use that same artwork.
-- Alexandria for copy and interface text. [Onest](https://fonts.google.com/specimen/Onest) for English headings; [IBM Plex Sans Arabic](https://fonts.google.com/specimen/IBM+Plex+Sans+Arabic) for Arabic headings. Both downloaded from the official Google Fonts repository; all fonts and licenses are local.
+- Alexandria for copy and interface text. [Onest](https://fonts.google.com/specimen/Onest) for English headings; [El Messiri](https://fonts.google.com/specimen/El+Messiri) for Arabic headings. Both downloaded from the official Google Fonts repository; all fonts and licenses are local.
 - Magenta display accents, blush expertise and contact sections, all six store photos from the profile, and a clean partner wall with individual brand and relationship descriptions.
 - No partner filters, tabbed business panels, invented monograms, generic model images or animated statistics.
 - Logical layout properties, mirrored directional arrows, keyboard-accessible menus and reduced-motion behavior.
@@ -47,10 +47,10 @@ Original SVGs for Vagheggi, Urban Care, Paris Bleu, Barbara and Lazurde would im
 
 ## Local review
 
-The latest revision was checked in both languages at 320, 375, 768 and 1440px, with screenshots reviewed at mobile and desktop sizes. No horizontal overflow, overflowing headings or missing images. Active navigation correctly identifies Brands, Retail and Contact. Reduced motion leaves no running animations. JavaScript syntax and Git whitespace checks pass.
+The latest revision was checked in both languages at 320, 375, 768, 1024 and 1440px, with screenshots reviewed at mobile and desktop sizes. No horizontal overflow, overflowing headings or missing images. The correct fonts load in each language. Arabic headings have no clipping mask; their whole lines fade and move into view, preserving diacritics. Contact navigation remains active and reduced motion leaves no running animations. JavaScript syntax and Git whitespace checks pass.
 
 ## Motion and contact sources
 
-[Motion on GitHub](https://github.com/motiondivision/motion) and its [inView documentation](https://motion.dev/docs/inview) informed viewport entrances and transform/opacity animation. This static site implements them with native IntersectionObserver and Web Animations, without a runtime dependency. Whole heading lines preserve Arabic joining; content remains readable without JavaScript. Active navigation updates once per animation frame.
+[Motion on GitHub](https://github.com/motiondivision/motion) and its [inView documentation](https://motion.dev/docs/inview) informed viewport entrances and transform/opacity animation. This static site implements them with native IntersectionObserver and Web Animations, without a runtime dependency. Whole heading lines preserve Arabic joining; content remains readable without JavaScript. Active navigation updates once per animation frame. Contact and social icons use local SVGs from [Tabler Icons](https://github.com/tabler/tabler-icons), with the MIT license in `assets/icons/LICENSE`.
 
 The profile footer names Instagram accounts `baghekhatina` and `flormar_iraq`, and a Facebook page called Baghe khatina iraq. The Facebook destination is taken from the existing company website. Email `info@baghekhatina.com` also comes from that website. Instagram/Facebook block automated verification; account ownership and current activity could not be independently confirmed. No corporate LinkedIn destination was established, so none is invented. These source-backed links are included for company review.

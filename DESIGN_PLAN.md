@@ -13,7 +13,7 @@ The company profile uses a light editorial composition with magenta headings and
 
 ## Typography and proportions
 
-Alexandria remains the copy and interface font. English headings use Onest; Arabic headings use IBM Plex Sans Arabic. Large display text is reserved for the opening and section headings. Body copy, captions, navigation and source notes have separate scales.
+Alexandria remains the copy and interface font. English headings use Onest; Arabic headings use El Messiri. Large display text is reserved for the opening and section headings. Body copy, captions and navigation have separate readable scales. The company section label sits directly above its heading, removing the empty side column.
 
 The content column is capped at 1280px. Logical properties adapt alignment and spacing for Arabic. Photo proportions, heading line breaks, logo sizes and responsive stacking are deliberately controlled.
 
@@ -25,7 +25,7 @@ The partner wall contains six genuine SVGs: Flormar, Callista, Debby, Pastel, Pe
 
 ## Interaction
 
-The business model is readable without tabs. The portfolio has no filters. Heading lines reveal in sequence; sections enter on scroll; photos and directional links respond to hover. Navigation highlights the section being read. Reduced-motion support cancels animations; content stays visible before JavaScript runs.
+The business model is readable without tabs. The portfolio has no filters. English heading lines reveal through masks; Arabic lines fade and move without masks to prevent clipped diacritics. Sections enter on scroll; photos and directional links respond to hover. Navigation highlights the section being read. Reduced-motion support cancels animations; content stays visible before JavaScript runs. Contact channels and social buttons pair vector icons with labels and adjacent directional arrows. Source and photography handoff notes remain in the README rather than the visitor-facing copy.
 
 ## Reference principles
 

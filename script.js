@@ -78,7 +78,10 @@ function playEntrance(element) {
   activeAnimations.add(animation);
   animation.finished.catch(() => {}).finally(() => activeAnimations.delete(animation));
   element.querySelectorAll('.heading-line > span').forEach((line, index) => {
-    const reveal = line.animate([
+    const reveal = line.animate(isArabic ? [
+      { opacity: 0, transform: 'translateY(24px)' },
+      { opacity: 1, transform: 'translateY(0)' }
+    ] : [
       { transform: 'translateY(105%)' }, { transform: 'translateY(0)' }
     ], { duration: 950, delay: index * 100, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'backwards' });
     activeAnimations.add(reveal);
