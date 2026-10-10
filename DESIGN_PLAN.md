@@ -1,36 +1,23 @@
-# Baghe Khatina — implemented design direction
+﻿# Design direction
 
-The opening pairs a deep pink company panel with edge-to-edge retail photography. A pale footer strip carries the company's activities and an animated down arrow into the profile. The following sections use a light editorial composition with magenta headings and blush expertise and contact sections. The actual company mark appears on light backgrounds, preserving its supplied PNG artwork.
+The site is a company introduction for prospective brand partners and customers in Iraq. The layout emphasizes what Baghe Khatina does, which brands it represents, where its stores fit, and how to contact the team.
 
-## Page sequence
+## Composition
 
-1. A full-width company proposition and Baghe Khatina/Flormar store photograph, with direct routes to brands, partnerships and the company story.
-2. Baghdad origin and concise company background.
-3. Three visible capabilities: representation, distribution and retail.
-4. Nine international brand identities with descriptions of their products and relationship to the company, followed by Barbara and Lazurde as company lines.
-5. Four retail photographs, complementing the two storefront photographs in the opening and company story.
-6. A dedicated contact desk for phone, email and location, followed by three social account links and a compact footer.
+- A text-led hero reserves a wide photographic field. The current field is a labeled placeholder.
+- Two equal portrait frames follow the company story: a current location and a product still life.
+- A wide campaign frame creates one visual pause between expertise and the brand portfolio.
+- The branch section uses four equal landscape frames in a two-column grid. Numbered captions identify each scene.
+- Contact methods share one three-column band, followed by a consistent social row.
 
-## Typography and proportions
-
-Alexandria is used for copy, interface text and Arabic headings. English headings use Onest. Large display text is reserved for the opening and section headings. Body copy, captions and navigation have separate readable scales. The company section label sits directly above its heading, removing the empty side column.
-
-The content column is capped at 1280px. Logical properties adapt alignment and spacing for Arabic. Photo proportions, heading line breaks, logo sizes and responsive stacking are deliberately controlled.
-
-## Brand artwork
-
-The invented monogram favicon has been removed. The company PNG supplies the favicon and touch icon. Logo CSS applies no shadows or color filters.
-
-The partner wall contains six genuine SVGs: Flormar, Callista, Debby, Pastel, Petite Maison and Kezy. Remaining marks use authentic PNG artwork, with source records in `assets/partners/sources.json`. Their visible weights are balanced through individual size limits.
+All image slots use restrained solid-color placeholders, without generated images or decorative imitations of products. See README.md for the eight-photo brief.
 
 ## Interaction
 
-The business model is readable without tabs. The portfolio has no filters. English heading lines reveal through masks; Arabic lines fade and move without masks to prevent clipped diacritics. Sections enter on scroll; photos and directional links respond to hover. Navigation highlights the section being read. Reduced-motion support cancels animations; content stays visible before JavaScript runs. Contact channels and social buttons pair vector icons with labels and adjacent directional arrows. Source and photography handoff notes remain in the README rather than the visitor-facing copy.
+The branch and company frames move in proportion to scrolling: a small rise, scale and opacity change resolves as each frame enters view, then reverses on upward scroll. The work is scheduled with `requestAnimationFrame` and uses only transforms and opacity. Static content is the default without JavaScript and when reduced motion is requested. The delayed hero cue retains its portfolio-inspired eight-second behavior.
 
-## Reference principles
+## Research basis
 
-[Puig](https://www.puig.com/en/brands/) and [L’Oréal](https://www.loreal.com/en/our-global-brands-portfolio/) informed the distinction between the company’s voice and its individual brand identities. [cosnova](https://www.cosnova.com/en) and [Beauty Corporation](https://beauty-corporation.com/) informed clear corporate content and a direct commercial contact route.
-
-## Handoff
-
-The product-image placeholder requires an authentic 4:5 still life. Store photographs currently come from the supplied company profile. The company’s phone and present brand relationships should be confirmed for public release. Local visual and browser checks are recorded in `README.md`.
+- [Nielsen Norman Group: Homepage Design Principles](https://www.nngroup.com/articles/homepage-design-principles/) informed the clear hierarchy and purposeful imagery.
+- [MDN: Scroll-driven animation timelines](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Scroll-driven_animations/Timelines) informed the choice to make motion respond to scroll progress rather than play as a fixed entrance sequence.
+- [W3C WAI: Reduced motion](https://www.w3.org/WAI/WCAG22/Techniques/css/C39.html) informed the static fallback.

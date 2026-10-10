@@ -1,59 +1,40 @@
-# Baghe Khatina company profile
+﻿# Baghe Khatina website
 
-English and Arabic static company website. Open `index.html` or `ar.html`, or preview with `python -m http.server 8000`. No build step is required.
+A static company site in English (`index.html`), Arabic (`ar.html`) and Sorani Kurdish (`ku.html`). Preview locally with `python -m http.server 8000`. No build step is required.
 
-## Design and identity
+## Photography to supply
 
-- Actual company PNG from the employee arrival app, proportionally resized for web use and displayed without shadows, outlines, recoloring or inversion. The favicon and Apple icon use that same artwork.
-- [Alexandria](https://fonts.google.com/specimen/Alexandria) for copy, interface text and Arabic headings. [Onest](https://fonts.google.com/specimen/Onest) for English headings. All fonts and licenses are local.
-- A full-width opening pairs a deep pink company panel with actual store photography. Two direct calls to action lead to brands and partnerships; a company-specific down arrow leads into the profile. Home appears in both navigation menus and participates in active section tracking.
-- Magenta display accents, blush expertise and contact sections, all six store photos from the profile, and a clean partner wall with individual brand and relationship descriptions.
-- No partner filters, tabbed business panels, invented monograms, generic model images or animated statistics.
-- Logical layout properties, mirrored directional arrows, keyboard-accessible menus and reduced-motion behavior.
+All content-image areas now contain plain, labeled placeholders. The image slots are identified by `data-photo-slot` in the HTML. Please provide eight approved photographs:
 
-## Logo artwork
+| No. | Slot | Photograph needed | Minimum size |
+| --- | --- | --- | --- |
+| 01 | `hero-wide` | Campaign photograph that conveys Baghe Khatina's beauty business. Keep a quiet area for the headline on the left in English and on the right in Arabic and Sorani; separate crops for RTL and mobile are ideal. | 2400 x 1350 px, 16:9 |
+| 02 | `company-portrait` | Current Baghe Khatina storefront or team at a real location. | 1600 x 2000 px, 4:5 |
+| 03 | `product-portrait` | Carefully arranged products actually stocked or produced by the company, with correct packaging and logos. | 1600 x 2000 px, 4:5 |
+| 04 | `campaign-wide` | Environmental beauty or retail campaign scene with quiet space for a large statement. | 2400 x 1350 px, 16:9 |
+| 05 | `retail-landscape` | Flormar storefront. | 2000 x 1500 px, 4:3 |
+| 06 | `retail-landscape` | Baghe Khatina and Flormar storefront. | 2000 x 1500 px, 4:3 |
+| 07 | `retail-landscape` | Inside a store, showing the shopping space. | 2000 x 1500 px, 4:3 |
+| 08 | `retail-landscape` | A close detail of a display or product shelf. | 2000 x 1500 px, 4:3 |
 
-The logo wall uses authentic artwork. SVGs contain original paths, not traced bitmaps or raster images embedded in SVG wrappers. White variants of Callista and Debby are rendered in dark monochrome without changing their outlines. Pastel and Petite Maison paths were extracted directly from their original brand publications.
+Use original photographs with no text baked into the image. Keep image rights and current brand presentation verified. The old extracted store photographs remain in `assets/stores/` as source material but are no longer displayed in these slots. Brand logos remain the supplied artwork.
 
-| Brand | Website asset | Artwork source |
-| --- | --- | --- |
-| Flormar | SVG | [Official website](https://www.flormar.com/) |
-| Callista | SVG | [Official website](https://callistabeauty.co/en/) |
-| Debby | SVG | [Official website](https://debbymakeup.it/), current wordmark |
-| Pastel | SVG | [Pinkar brand catalogue](https://pinkar.com/catalog/Pastel_Katalog.pdf), cover paths |
-| Petite Maison | SVG | [BFF brand publication](https://beautyff.com/pdf/1.pdf), cover wordmark paths |
-| Kezy | SVG | [Official website](https://www.kezy.it/en) |
-| Vagheggi | PNG | [Official website](https://www.vagheggi.com/en/) |
-| Urban Care | PNG | [Official website](https://www.urbancare.com.tr/) |
-| Paris Bleu | PNG | [Official website](https://www.parisbleu.com/) |
-| Barbara and Lazurde | PNG | Supplied English company profile, page 8 |
+## Design and motion
 
-Logo display sizes are balanced by their visible proportions, rather than scaling every differently shaped mark to the same width. Exact asset URLs are preserved in `assets/partners/sources.json`. Original profile extractions are retained in `assets/brand-logos/` as source files.
+`refresh.css` follows `styles.css` and contains the current editorial layout. The company pair has equal 4:5 frames. The branch gallery has four equal 4:3 frames. The contact methods and social links use consistent columns rather than a floating panel. All three languages share the same structure.
 
-## Company content
+Media frames respond to scroll progress through the small `requestAnimationFrame` controller in `script.js`: they rise and settle as they enter view, and reverse when scrolling back. Without JavaScript, frames remain fully visible. Reduced-motion users see static frames. The existing home scroll cue appears after eight seconds on the hero and hides when the visitor leaves it or switches tabs.
 
-The supplied English and Arabic PDFs provide the Baghdad origin, Flormar introduction, distribution and retail background, company lines and Baghdad phone number. Store photography was extracted from page 9 of the English PDF.
+The layout was checked at 320, 390, 820 and 1440px in all three languages. The copy and current contact details should be reviewed by the company before publication; Sorani should receive a native editorial review.
 
-The older [company page](https://www.baghekhatina.com/aboutus.html) and [business page](https://www.baghekhatina.com/business.html) support the broad retail, wholesale and representation model. Their historic contact and branch figures differ from the PDF, so those records are not combined into a current count. Unsupported market-share and first/largest claims are omitted.
+## Brand artwork and content provenance
 
-The portfolio note identifies its documentary source and offers a route to confirm current availability. Before public release, the company should verify its phone and current brand relationships.
+The company mark, favicon and touch icon are supplied assets. Local font files include Onest, Alexandria, IBM Plex Sans Arabic and Noto Sans Arabic with their licenses. Partner logos retain their existing SVG or PNG assets; source URLs are listed in `assets/partners/sources.json`.
 
-## Remaining photography
+The supplied English and Arabic company profiles support the Baghdad origin, Flormar relationship, distribution and retail activities, company labels and phone number. Historic branch counts and unsupported market-share claims are omitted. The social destinations and email originate from the company website or profile and should be confirmed before publication.
 
-The visible placeholder is for an authentic product still life: **4:5 portrait, at least 1600 × 2000px**, accurate packaging and logos, clean lighting and no text baked into the photograph. It should feature actual stocked or company-developed products.
+## References
 
-Current exterior/interior photography can replace the profile images if available: **3:2 landscape, at least 1800 × 1200px**. Provide a wider **16:9** storefront photograph for the opening strip if possible.
-
-Original SVGs for Vagheggi, Urban Care, Paris Bleu, Barbara and Lazurde would improve future asset handoff. Their current assets are honestly identified as raster artwork.
-
-## Local review
-
-The opening redesign was checked in both languages at 320, 375, 821, 1024 and 1440px, with screenshots reviewed at mobile and desktop sizes. No horizontal overflow or overflowing hero headings. Home highlights on entry; the down arrow moves to Company and updates the active section. Arabic headings have no clipping mask; their whole lines fade and move into view, preserving diacritics. Reduced motion leaves no running animations. JavaScript syntax and Git whitespace checks pass.
-
-The opening references the prominent imagery and short brand positioning of [Puig](https://www.puig.com/en/) and [cosnova](https://www.cosnova.com/en/). The down-arrow motion takes inspiration from the portfolio's scroll cue, with the company palette, an integrated label and a native anchor. The arrow moves for three cycles rather than indefinitely.
-
-## Motion and contact sources
-
-[Motion on GitHub](https://github.com/motiondivision/motion) and its [inView documentation](https://motion.dev/docs/inview) informed viewport entrances and transform/opacity animation. This static site implements them with native IntersectionObserver and Web Animations, without a runtime dependency. Whole heading lines preserve Arabic joining; content remains readable without JavaScript. Active navigation updates once per animation frame. Contact and social icons use local SVGs from [Tabler Icons](https://github.com/tabler/tabler-icons), with the MIT license in `assets/icons/LICENSE`.
-
-The profile footer names Instagram accounts `baghekhatina` and `flormar_iraq`, and a Facebook page called Baghe khatina iraq. The Facebook destination is taken from the existing company website. Email `info@baghekhatina.com` also comes from that website. Instagram/Facebook block automated verification; account ownership and current activity could not be independently confirmed. No corporate LinkedIn destination was established, so none is invented. These source-backed links are included for company review.
+- [Nielsen Norman Group: Homepage Design Principles](https://www.nngroup.com/articles/homepage-design-principles/) for a clear proposition and purposeful visual hierarchy.
+- [MDN: Scroll-driven animation timelines](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Scroll-driven_animations/Timelines) for motion tied to scroll progress.
+- [W3C WAI: Reduced motion](https://www.w3.org/WAI/WCAG22/Techniques/css/C39.html) for static presentation when motion is reduced.

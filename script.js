@@ -7,6 +7,7 @@ const languageMenu = picker?.querySelector('.language-menu');
 const menuButton = document.querySelector('.menu-toggle');
 const mainNav = document.querySelector('.main-nav');
 const isArabic = document.documentElement.dir === 'rtl';
+const isKurdish = document.documentElement.lang === 'ckb';
 
 function setLanguageMenu(open) {
   if (!languageButton || !languageMenu) return;
@@ -17,7 +18,7 @@ function setLanguageMenu(open) {
 function setMobileMenu(open) {
   if (!menuButton || !mainNav) return;
   menuButton.setAttribute('aria-expanded', String(open));
-  menuButton.setAttribute('aria-label', isArabic ? (open ? 'أغلق القائمة' : 'افتح القائمة') : (open ? 'Close menu' : 'Open menu'));
+  menuButton.setAttribute('aria-label', isKurdish ? (open ? 'مێنیووەکە دابخە' : 'مێنیووەکە بکەرەوە') : isArabic ? (open ? 'أغلق القائمة' : 'افتح القائمة') : (open ? 'Close menu' : 'Open menu'));
   mainNav.classList.toggle('is-open', open);
 }
 
@@ -101,6 +102,77 @@ if ('IntersectionObserver' in window) {
 }
 motionPreference.addEventListener('change', event => {
   if (event.matches) activeAnimations.forEach(animation => animation.cancel());
+});
+
+// Media frames track the visitor's scroll position; static frames remain the fallback.
+const scrollMedia = [...document.querySelectorAll('[data-scroll-media]')];
+let mediaFrameRequested = false;
+function updateScrollMedia() {
+  mediaFrameRequested = false;
+  if (motionPreference.matches) {
+    scrollMedia.forEach(card => card.removeAttribute('style'));
+    return;
+  }
+  const start = innerHeight * .88;
+  const distance = innerHeight * .62;
+  const positions = scrollMedia.map(card => {
+    const previousShift = parseFloat(card.style.getPropertyValue('--media-shift')) || 0;
+    return { card, top: card.getBoundingClientRect().top - previousShift };
+  });
+  positions.forEach(({ card, top }) => {
+    const progress = Math.max(0, Math.min(1, (start - top) / distance));
+    card.style.setProperty('--media-shift', `${Math.round((1 - progress) * 42)}px`);
+    card.style.setProperty('--media-scale', (0.955 + progress * .045).toFixed(3));
+    card.style.setProperty('--media-opacity', (0.68 + progress * .32).toFixed(3));
+    card.style.setProperty('--media-line', `${Math.round(18 + progress * 16)}px`);
+  });
+}
+function scheduleScrollMedia() {
+  if (mediaFrameRequested) return;
+  mediaFrameRequested = true;
+  requestAnimationFrame(updateScrollMedia);
+}
+if (scrollMedia.length) {
+  addEventListener('scroll', scheduleScrollMedia, { passive: true });
+  addEventListener('resize', scheduleScrollMedia);
+  motionPreference.addEventListener('change', scheduleScrollMedia);
+  scheduleScrollMedia();
+}
+
+// Reveal the existing scroll control after the visitor stays on the hero.
+const hero = document.getElementById('home');
+const scrollCue = document.querySelector('.hero-scroll-cue');
+let cueTimer;
+let heroActive = false;
+function hideScrollCue() {
+  scrollCue?.classList.remove('is-visible');
+  scrollCue?.setAttribute('aria-hidden', 'true');
+  scrollCue?.setAttribute('tabindex', '-1');
+}
+function updateScrollCue() {
+  if (!hero || !scrollCue) return;
+  const rect = hero.getBoundingClientRect();
+  const active = document.visibilityState === 'visible' && rect.top <= innerHeight * .24 && rect.bottom >= innerHeight * .58;
+  if (active === heroActive) return;
+  heroActive = active;
+  clearTimeout(cueTimer);
+  hideScrollCue();
+  if (active) cueTimer = setTimeout(() => {
+    if (heroActive) {
+      scrollCue.classList.add('is-visible');
+      scrollCue.setAttribute('aria-hidden', 'false');
+      scrollCue.removeAttribute('tabindex');
+    }
+  }, 8000);
+}
+hideScrollCue();
+addEventListener('scroll', updateScrollCue, { passive: true });
+addEventListener('resize', updateScrollCue);
+document.addEventListener('visibilitychange', updateScrollCue);
+updateScrollCue();
+scrollCue?.addEventListener('click', () => {
+  clearTimeout(cueTimer);
+  hideScrollCue();
 });
 
 // Mark the section at the reading position, including the final short section.
