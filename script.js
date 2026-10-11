@@ -62,84 +62,22 @@ document.addEventListener('keydown', event => {
   }
 });
 
-// Whole heading lines preserve Arabic joining and the original accessible text.
+// Native view timelines create a scroll-linked editorial rhythm without a
+// per-frame scroll handler. IntersectionObserver keeps the same content visible
+// and gently animated in browsers that do not support view timelines.
 const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
-const activeAnimations = new Set();
-document.querySelectorAll('h1, h2').forEach(heading => {
-  const lines = heading.innerHTML.split(/<br\s*\/?>/i);
-  heading.innerHTML = lines.map(line => `<span class="heading-line"><span>${line}</span></span>`).join('');
-});
-
-function playEntrance(element) {
-  if (motionPreference.matches || !element.animate) return;
-  const animation = element.animate([
-    { opacity: 0.15, transform: 'translateY(24px)' },
-    { opacity: 1, transform: 'translateY(0)' }
-  ], { duration: 750, easing: 'cubic-bezier(.16,1,.3,1)' });
-  activeAnimations.add(animation);
-  animation.finished.catch(() => {}).finally(() => activeAnimations.delete(animation));
-  element.querySelectorAll('.heading-line > span').forEach((line, index) => {
-    const reveal = line.animate(isArabic ? [
-      { opacity: 0, transform: 'translateY(24px)' },
-      { opacity: 1, transform: 'translateY(0)' }
-    ] : [
-      { transform: 'translateY(105%)' }, { transform: 'translateY(0)' }
-    ], { duration: 950, delay: index * 100, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'backwards' });
-    activeAnimations.add(reveal);
-    reveal.finished.catch(() => {}).finally(() => activeAnimations.delete(reveal));
-  });
-}
-
-if ('IntersectionObserver' in window) {
-  const observer = new IntersectionObserver(entries => {
+const hasViewTimelines = CSS.supports('animation-timeline: view()');
+if (hasViewTimelines && !motionPreference.matches) document.documentElement.classList.add('scroll-timelines');
+else if (!motionPreference.matches && 'IntersectionObserver' in window) {
+  document.documentElement.classList.add('scroll-motion-fallback');
+  const revealObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
-      playEntrance(entry.target);
-      observer.unobserve(entry.target);
+      entry.target.classList.add('is-visible');
+      revealObserver.unobserve(entry.target);
     });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('[data-reveal]').forEach(element => observer.observe(element));
-}
-motionPreference.addEventListener('change', event => {
-  if (event.matches) activeAnimations.forEach(animation => animation.cancel());
-});
-
-// The editorial frames open as they enter the reading area. Each pair has a
-// small offset, while image depth, caption and rule follow the same progress.
-const scrollMedia = [...document.querySelectorAll('[data-scroll-media]')];
-let mediaFrameRequested = false;
-function updateScrollMedia() {
-  mediaFrameRequested = false;
-  if (motionPreference.matches) {
-    scrollMedia.forEach(card => card.removeAttribute('style'));
-    return;
-  }
-  const viewport = innerHeight;
-  scrollMedia.forEach(card => {
-    const top = card.getBoundingClientRect().top;
-    const secondInPair = [...card.parentElement.children].indexOf(card) % 2 === 1;
-    const start = viewport * (secondInPair ? .98 : 1.04);
-    const end = viewport * (secondInPair ? .62 : .68);
-    const progress = Math.max(0, Math.min(1, (start - top) / (start - end)));
-    card.style.setProperty('--reveal-cover', `${Math.round((1 - progress) * 100)}%`);
-    card.style.setProperty('--reveal-rise', `${Math.round((1 - progress) * 44)}px`);
-    card.style.setProperty('--reveal-scale', (1.12 - progress * .12).toFixed(3));
-    card.style.setProperty('--reveal-opacity', progress.toFixed(3));
-    card.style.setProperty('--reveal-line', `${Math.round(progress * 48)}px`);
-  });
-}
-function scheduleScrollMedia() {
-  if (mediaFrameRequested) return;
-  mediaFrameRequested = true;
-  requestAnimationFrame(updateScrollMedia);
-}
-if (scrollMedia.length) {
-  addEventListener('scroll', scheduleScrollMedia, { passive: true });
-  addEventListener('resize', scheduleScrollMedia);
-  addEventListener('load', scheduleScrollMedia);
-  document.fonts?.ready.then(scheduleScrollMedia);
-  motionPreference.addEventListener('change', scheduleScrollMedia);
-  updateScrollMedia();
+  }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('[data-reveal], [data-scroll-media]').forEach(element => revealObserver.observe(element));
 }
 
 // Reveal the existing scroll control after the visitor stays on the hero.
