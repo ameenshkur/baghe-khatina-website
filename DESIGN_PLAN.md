@@ -4,20 +4,24 @@ The site is a company introduction for prospective brand partners and customers 
 
 ## Composition
 
-- A text-led hero reserves a wide photographic field. The current field is a labeled placeholder.
-- Two equal portrait frames follow the company story: a current location and a product still life.
-- A wide campaign frame creates one visual pause between expertise and the brand portfolio.
-- The branch section uses four equal landscape frames in a two-column grid. Numbered captions identify each scene.
+- A balanced split hero reserves half its width for campaign photography. A wide profile makeup scene fills it provisionally.
+- Two equal portrait frames follow the company story: a Baghe Khatina/Flormar location and an in-store product display from the profile. Both are provisional low-resolution photos pending the requested new shoots.
+- A wide profile makeup scene creates one visual pause between expertise and the brand portfolio.
+- The branch section uses a balanced two-column gallery with numbered captions. Each photo opens as its row enters the viewport, with a short, paired scroll reveal and slight image depth. Profile photographs provide provisional content.
 - Contact methods share one three-column band, followed by a consistent social row.
 
-All image slots use restrained solid-color placeholders, without generated images or decorative imitations of products. See README.md for the eight-photo brief.
+The hero, visual interlude, portrait pair and four retail slots show existing profile photographs provisionally. See README.md for the eight-photo brief and source limitations.
 
 ## Interaction
 
-The branch and company frames move in proportion to scrolling: a small rise, scale and opacity change resolves as each frame enters view, then reverses on upward scroll. The work is scheduled with `requestAnimationFrame` and uses only transforms and opacity. Static content is the default without JavaScript and when reduced motion is requested. The delayed hero cue retains its portfolio-inspired eight-second behavior.
+The paired portrait and branch frames reveal with a brief top-down image curtain, a restrained scale settle and caption rule. The pair follows a slight stagger; the effect tracks scroll position and reverses on upward scroll. Motion is scheduled with `requestAnimationFrame`; without JavaScript or with reduced motion, the images remain visible. The delayed hero cue retains its eight-second behavior.
+
+English display headlines use Instrument Serif; Arabic and Sorani display headlines use Kufam, checked for Sorani-specific glyph coverage. Alexandria remains the English and Arabic copy face, and IBM Plex Sans Arabic remains the Sorani copy face.
 
 ## Research basis
 
 - [Nielsen Norman Group: Homepage Design Principles](https://www.nngroup.com/articles/homepage-design-principles/) informed the clear hierarchy and purposeful imagery.
-- [MDN: Scroll-driven animation timelines](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Scroll-driven_animations/Timelines) informed the choice to make motion respond to scroll progress rather than play as a fixed entrance sequence.
+- [Google Fonts: Instrument Serif](https://github.com/Instrument/instrument-serif) informed the English headline choice for its contemporary display serif construction.
+- [Google Fonts: Kufam](https://github.com/originaltype/kufam) informed the Arabic and Sorani headline choice for its Kufi-inspired Arabic and Latin forms.
+- [Google Chrome: Scroll-driven animations](https://github.com/GoogleChrome/developer.chrome.com/blob/main/site/en/articles/scroll-driven-animations/index.md) informed the scroll-linked image treatment.
 - [W3C WAI: Reduced motion](https://www.w3.org/WAI/WCAG22/Techniques/css/C39.html) informed the static fallback.

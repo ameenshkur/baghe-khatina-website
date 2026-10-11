@@ -104,7 +104,8 @@ motionPreference.addEventListener('change', event => {
   if (event.matches) activeAnimations.forEach(animation => animation.cancel());
 });
 
-// Media frames track the visitor's scroll position; static frames remain the fallback.
+// The editorial frames open as they enter the reading area. Each pair has a
+// small offset, while image depth, caption and rule follow the same progress.
 const scrollMedia = [...document.querySelectorAll('[data-scroll-media]')];
 let mediaFrameRequested = false;
 function updateScrollMedia() {
@@ -113,18 +114,18 @@ function updateScrollMedia() {
     scrollMedia.forEach(card => card.removeAttribute('style'));
     return;
   }
-  const start = innerHeight * .88;
-  const distance = innerHeight * .62;
-  const positions = scrollMedia.map(card => {
-    const previousShift = parseFloat(card.style.getPropertyValue('--media-shift')) || 0;
-    return { card, top: card.getBoundingClientRect().top - previousShift };
-  });
-  positions.forEach(({ card, top }) => {
-    const progress = Math.max(0, Math.min(1, (start - top) / distance));
-    card.style.setProperty('--media-shift', `${Math.round((1 - progress) * 42)}px`);
-    card.style.setProperty('--media-scale', (0.955 + progress * .045).toFixed(3));
-    card.style.setProperty('--media-opacity', (0.68 + progress * .32).toFixed(3));
-    card.style.setProperty('--media-line', `${Math.round(18 + progress * 16)}px`);
+  const viewport = innerHeight;
+  scrollMedia.forEach(card => {
+    const top = card.getBoundingClientRect().top;
+    const secondInPair = [...card.parentElement.children].indexOf(card) % 2 === 1;
+    const start = viewport * (secondInPair ? .98 : 1.04);
+    const end = viewport * (secondInPair ? .62 : .68);
+    const progress = Math.max(0, Math.min(1, (start - top) / (start - end)));
+    card.style.setProperty('--reveal-cover', `${Math.round((1 - progress) * 100)}%`);
+    card.style.setProperty('--reveal-rise', `${Math.round((1 - progress) * 44)}px`);
+    card.style.setProperty('--reveal-scale', (1.12 - progress * .12).toFixed(3));
+    card.style.setProperty('--reveal-opacity', progress.toFixed(3));
+    card.style.setProperty('--reveal-line', `${Math.round(progress * 48)}px`);
   });
 }
 function scheduleScrollMedia() {
@@ -135,8 +136,10 @@ function scheduleScrollMedia() {
 if (scrollMedia.length) {
   addEventListener('scroll', scheduleScrollMedia, { passive: true });
   addEventListener('resize', scheduleScrollMedia);
+  addEventListener('load', scheduleScrollMedia);
+  document.fonts?.ready.then(scheduleScrollMedia);
   motionPreference.addEventListener('change', scheduleScrollMedia);
-  scheduleScrollMedia();
+  updateScrollMedia();
 }
 
 // Reveal the existing scroll control after the visitor stays on the hero.
