@@ -635,3 +635,19 @@ html[lang=en] .partners .own-logo{min-height:170px;border:1px solid var(--line)}
  html[lang=en] .partners .own-labels{grid-template-columns:1fr;padding:18px}
 }
 @media(prefers-reduced-motion:reduce){.contact-route:hover{transform:none}}
+
+/* Supplied portfolio artwork: keep every logo band at a comparable visual height. */
+.portfolio-carousel .logo-stage,.portfolio-carousel .partner-logo:first-child .logo-stage{position:relative;overflow:hidden;padding:0;background:#fff}
+.portfolio-carousel .logo-stage img,.portfolio-carousel .partner-logo:first-child .logo-stage img{position:absolute;inset:0;width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;transform:scale(var(--art-scale,1.25))}
+.portfolio-carousel .logo-flormar{--art-scale:1.30}
+.portfolio-carousel .logo-callista{--art-scale:1.55}
+.portfolio-carousel .logo-debby{--art-scale:1.17}
+.portfolio-carousel .logo-pastel{--art-scale:1.38}
+.portfolio-carousel .logo-vagheggi{--art-scale:1.46}
+.portfolio-carousel .logo-petite-maison{--art-scale:1.23}
+.portfolio-carousel .logo-kezy{--art-scale:1.48}
+.portfolio-carousel .logo-urban-care{--art-scale:1.25}
+.portfolio-carousel .logo-paris-bleu{--art-scale:1.21}
+.own-labels .own-logo{--art-scale:1}
+.own-labels .own-logo:last-child{--art-scale:1}
+.own-labels .own-logo img,.own-labels .own-logo img[src$="lazurde.webp"]{display:block;width:100%;height:auto;max-width:none;max-height:none;aspect-ratio:1;object-fit:cover;transform:scale(var(--art-scale))}
