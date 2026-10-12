@@ -62,22 +62,40 @@ document.addEventListener('keydown', event => {
   }
 });
 
-// Native view timelines create a scroll-linked editorial rhythm without a
-// per-frame scroll handler. IntersectionObserver keeps the same content visible
-// and gently animated in browsers that do not support view timelines.
+// One predictable entrance system across all three language pages.
 const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
-const hasViewTimelines = CSS.supports('animation-timeline: view()');
-if (hasViewTimelines && !motionPreference.matches) document.documentElement.classList.add('scroll-timelines');
-else if (!motionPreference.matches && 'IntersectionObserver' in window) {
-  document.documentElement.classList.add('scroll-motion-fallback');
+if (!motionPreference.matches && 'IntersectionObserver' in window) {
+  document.documentElement.classList.add('motion-ready');
   const revealObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       entry.target.classList.add('is-visible');
       revealObserver.unobserve(entry.target);
     });
-  }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
-  document.querySelectorAll('[data-reveal], [data-scroll-media]').forEach(element => revealObserver.observe(element));
+  }, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
+  document.querySelectorAll('[data-reveal], [data-scroll-media], .expertise-row').forEach(element => revealObserver.observe(element));
+}
+
+// A small scroll-linked depth shift on the two large photographs.
+if (!motionPreference.matches) {
+  const depthImages = document.querySelectorAll('.hero-photo--filled img, .interlude-photo[src]');
+  let depthScheduled = false;
+  function updateDepth() {
+    depthScheduled = false;
+    depthImages.forEach(image => {
+      const section = image.closest('section');
+      const rect = section.getBoundingClientRect();
+      if (rect.bottom < 0 || rect.top > innerHeight) return;
+      const distance = (rect.top + rect.height / 2 - innerHeight / 2) / (innerHeight + rect.height);
+      image.style.setProperty('--photo-shift', `${Math.max(-40, Math.min(40, distance * -90))}px`);
+    });
+  }
+  function scheduleDepth() {
+    if (!depthScheduled) { depthScheduled = true; requestAnimationFrame(updateDepth); }
+  }
+  addEventListener('scroll', scheduleDepth, { passive: true });
+  addEventListener('resize', scheduleDepth);
+  updateDepth();
 }
 
 // Reveal the existing scroll control after the visitor stays on the hero.
