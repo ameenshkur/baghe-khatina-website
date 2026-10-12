@@ -76,6 +76,31 @@ if (!motionPreference.matches && 'IntersectionObserver' in window) {
   document.querySelectorAll('[data-reveal], [data-scroll-media], .expertise-row').forEach(element => revealObserver.observe(element));
 }
 
+// Let the real figures remain readable without JavaScript or with reduced motion.
+// Animate them once when the reach section enters view.
+const reachNumbers = document.querySelectorAll('.reach-number[data-count]');
+if (reachNumbers.length && !motionPreference.matches && 'IntersectionObserver' in window) {
+  const countObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      countObserver.unobserve(entry.target);
+      const element = entry.target;
+      const target = Number(element.dataset.count);
+      if (!Number.isFinite(target)) return;
+      const duration = 1300;
+      const start = performance.now();
+      function tick(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        element.textContent = String(Math.round(target * (1 - (1 - progress) ** 3)));
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      element.textContent = '0';
+      requestAnimationFrame(tick);
+    });
+  }, { threshold: 0.3 });
+  reachNumbers.forEach(number => countObserver.observe(number));
+}
+
 // A small scroll-linked depth shift on the two large photographs.
 if (!motionPreference.matches) {
   const depthImages = document.querySelectorAll('.hero-photo--filled img, .interlude-photo[src]');
@@ -104,10 +129,10 @@ const portfolioWall = document.querySelector('.partner-wall');
 if (portfolioWall) {
   const cards = [...portfolioWall.querySelectorAll(':scope > .partner-logo')];
   const words = isKurdish
-    ? { region: 'کۆمەڵەی براندەکان', list: 'براندێک هەڵبژێرە', previous: 'براندی پێشوو', next: 'براندی داهاتوو', label: 'پەیوەندیی براند' }
+    ? { region: 'کۆمەڵەی براندەکان', list: 'براندێک هەڵبژێرە', previous: 'براندی پێشوو', next: 'براندی داهاتوو', label: 'کۆمەڵەی براندەکان' }
     : isArabic
-      ? { region: 'محفظة العلامات', list: 'اختر علامة', previous: 'العلامة السابقة', next: 'العلامة التالية', label: 'علاقة مع علامة' }
-      : { region: 'Brand portfolio', list: 'Choose a brand', previous: 'Previous brand', next: 'Next brand', label: 'Brand relationship' };
+      ? { region: 'محفظة العلامات', list: 'اختر علامة', previous: 'العلامة السابقة', next: 'العلامة التالية', label: 'محفظة العلامات' }
+      : { region: 'Brand portfolio', list: 'Choose a brand', previous: 'Previous brand', next: 'Next brand', label: 'Portfolio' };
   if (cards.length > 1) {
     const carousel = document.createElement('div');
     carousel.className = 'portfolio-carousel';
@@ -142,7 +167,7 @@ if (portfolioWall) {
     cards.forEach((card, position) => {
       const logo = card.querySelector('.logo-stage img');
       const description = card.querySelector('p');
-      const name = logo?.alt || String(position + 1);
+      const name = logo?.alt || card.dataset.brand || String(position + 1);
       const button = document.createElement('button');
       button.type = 'button';
       button.textContent = name;

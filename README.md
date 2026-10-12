@@ -21,7 +21,9 @@ Use original photographs with no text baked into the image. Keep image rights an
 
 ## Design and motion
 
-`refresh.css` follows `styles.css` and applies the employee arrival app's active black (`#111111`), pink (`#febcc8`), white, and light gray palette. The hero and campaign section use balanced split compositions. The company pair has equal 4:5 frames with editorial number markers and caption plates. Flormar leads a compact portfolio grid, and the owned labels have a separate dark panel. Branches appear in a balanced two-column gallery. All three languages share the same structure.
+`refresh.css` follows `styles.css` and applies the employee arrival app's active black (`#111111`), pink (`#febcc8`), white, and light gray palette. The hero and campaign section use balanced split compositions. The company pair has equal 4:5 frames with editorial number markers and caption plates. The portfolio carousel begins with Baghe Khatina and Lazurde; Barbara follows Debby in the same sequence. Branches appear in a balanced two-column gallery. All three languages share the same structure.
+
+The reach section presents the company-provided figures of 75 branches and 300 wholesale points across Iraq, with distribution to cosmetics stores and pharmacies. Its counters animate once when visible and retain their printed values when motion is reduced or JavaScript is unavailable.
 
 Photo frames open with a short top-down curtain, slight image scale settle and growing caption rule as they enter the viewport. Cards reveal in pairs with a small stagger; the motion follows scroll position and reverses when scrolling back. `script.js` updates through `requestAnimationFrame`. Without JavaScript or with reduced motion, all photos remain visible. The home scroll cue appears after eight seconds on the hero and hides when the visitor leaves it or switches tabs.
 

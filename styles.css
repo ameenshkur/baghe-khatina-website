@@ -1,4 +1,4 @@
-@font-face{font-family:Alexandria;src:url('assets/fonts/alexandria-variable.ttf') format('truetype');font-weight:100 900;font-style:normal;font-display:swap}
+﻿@font-face{font-family:Alexandria;src:url('assets/fonts/alexandria-variable.ttf') format('truetype');font-weight:100 900;font-style:normal;font-display:swap}
 @font-face{font-family:Onest;src:url('assets/fonts/onest-variable.ttf') format('truetype');font-weight:100 900;font-style:normal;font-display:swap}
 @font-face{font-family:'IBM Plex Sans Arabic';src:url('assets/fonts/IBMPlexSansArabic-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:'IBM Plex Sans Arabic';src:url('assets/fonts/IBMPlexSansArabic-Medium.woff2') format('woff2');font-weight:500;font-style:normal;font-display:swap}
@@ -93,7 +93,6 @@ figcaption{font-size:10px;color:var(--muted);padding-top:14px;line-height:1.7}
 .partner-wall{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line)}
 .partner-logo{height:145px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line);padding:22px 30px}
 .partner-logo img{width:165px;max-height:66px;object-fit:contain}
-.logo-callista img{width:148px;max-height:56px}
 .logo-debby img{width:145px;max-height:54px}
 .logo-pastel img{width:154px;max-height:40px}
 .logo-vagheggi img{width:175px;max-height:42px}
