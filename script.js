@@ -98,6 +98,90 @@ if (!motionPreference.matches) {
   updateDepth();
 }
 
+// Enhance the existing, translated brand cards into the portfolio from the
+// concept. The original grid remains available when JavaScript is disabled.
+const portfolioWall = document.querySelector('.partner-wall');
+if (portfolioWall) {
+  const cards = [...portfolioWall.querySelectorAll(':scope > .partner-logo')];
+  const words = isKurdish
+    ? { region: 'کۆمەڵەی براندەکان', list: 'براندێک هەڵبژێرە', previous: 'براندی پێشوو', next: 'براندی داهاتوو', label: 'پەیوەندیی براند' }
+    : isArabic
+      ? { region: 'محفظة العلامات', list: 'اختر علامة', previous: 'العلامة السابقة', next: 'العلامة التالية', label: 'علاقة مع علامة' }
+      : { region: 'Brand portfolio', list: 'Choose a brand', previous: 'Previous brand', next: 'Next brand', label: 'Brand relationship' };
+  if (cards.length > 1) {
+    const carousel = document.createElement('div');
+    carousel.className = 'portfolio-carousel';
+    carousel.setAttribute('role', 'region');
+    carousel.setAttribute('aria-roledescription', 'carousel');
+    carousel.setAttribute('aria-label', words.region);
+
+    const index = document.createElement('div');
+    index.className = 'brand-index';
+    index.setAttribute('aria-label', words.list);
+    const stage = document.createElement('div');
+    stage.className = 'portfolio-stage';
+    const controls = document.createElement('div');
+    controls.className = 'portfolio-controls';
+    const previous = document.createElement('button');
+    previous.type = 'button';
+    previous.setAttribute('aria-label', words.previous);
+    previous.textContent = isArabic ? '→' : '←';
+    const next = document.createElement('button');
+    next.type = 'button';
+    next.setAttribute('aria-label', words.next);
+    next.textContent = isArabic ? '←' : '→';
+    const count = document.createElement('span');
+    count.className = 'portfolio-count';
+    count.setAttribute('aria-live', 'polite');
+    controls.append(previous, count, next);
+    portfolioWall.before(carousel);
+    carousel.append(index, stage);
+    stage.append(portfolioWall, controls);
+
+    let current = 0;
+    cards.forEach((card, position) => {
+      const logo = card.querySelector('.logo-stage img');
+      const description = card.querySelector('p');
+      const name = logo?.alt || String(position + 1);
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = name;
+      button.addEventListener('click', () => showBrand(position));
+      index.append(button);
+
+      const info = document.createElement('div');
+      info.className = 'portfolio-info';
+      const kicker = document.createElement('span');
+      kicker.className = 'portfolio-kicker';
+      kicker.textContent = `${words.label} / ${String(position + 1).padStart(2, '0')}`;
+      const heading = document.createElement('h3');
+      heading.textContent = name;
+      info.append(kicker, heading);
+      if (description) info.append(description);
+      card.append(info);
+      card.setAttribute('role', 'group');
+      card.setAttribute('aria-roledescription', 'slide');
+      card.setAttribute('aria-label', `${position + 1} / ${cards.length}: ${name}`);
+    });
+
+    function showBrand(position) {
+      current = (position + cards.length) % cards.length;
+      cards.forEach((card, i) => { card.hidden = i !== current; });
+      [...index.children].forEach((button, i) => button.setAttribute('aria-current', String(i === current)));
+      count.textContent = `${String(current + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
+    }
+    previous.addEventListener('click', () => showBrand(current - 1));
+    next.addEventListener('click', () => showBrand(current + 1));
+    carousel.addEventListener('keydown', event => {
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        event.preventDefault();
+        showBrand(current + (event.key === 'ArrowRight' ? 1 : -1) * (isArabic ? -1 : 1));
+      }
+    });
+    showBrand(0);
+  }
+}
+
 // Reveal the existing scroll control after the visitor stays on the hero.
 const hero = document.getElementById('home');
 const scrollCue = document.querySelector('.hero-scroll-cue');
