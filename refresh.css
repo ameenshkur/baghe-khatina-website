@@ -586,8 +586,12 @@ html[lang=en] .hero-copy h1 em{font-style:normal}
 .route-label{margin-top:44px;font:400 33px/1.1 var(--display)}
 .route-value{display:flex;justify-content:space-between;gap:12px;align-items:end;margin-top:auto;padding-top:15px;font-size:13px;overflow-wrap:anywhere}
 .contact-bottom{display:flex;justify-content:space-between;gap:25px;align-items:center;margin-top:58px;padding-top:25px;border-top:1px solid #695962;color:#d0c3c8;font-size:12px}
-.contact-bottom a{margin-inline-start:25px;text-decoration:none}
-.contact-bottom a:hover{text-decoration:underline}
+.contact-socials{display:flex;flex-wrap:wrap;align-items:center;gap:28px}
+.contact-socials a{display:inline-flex;align-items:center;gap:10px;min-height:44px;color:#e9dfe3;text-decoration:none;transition:color .2s ease}
+.contact-socials svg{width:20px;height:20px;flex:none;color:#d9a5b8;transition:color .2s ease,transform .2s ease}
+.contact-socials a:hover,.contact-socials a:focus-visible{color:#fff}
+.contact-socials a:hover svg,.contact-socials a:focus-visible svg{color:#f0c5d4;transform:translateY(-2px)}
+.contact-socials a:focus-visible{outline:2px solid #f0c5d4;outline-offset:5px}
 
 /* The brand index and one-at-a-time stage follow the approved portfolio. */
 .portfolio-carousel{display:grid;grid-template-columns:180px minmax(0,1fr);border-block:1px solid var(--line)}
