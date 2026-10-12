@@ -673,6 +673,42 @@ html[lang=en] .partners .own-logo{min-height:170px;border:1px solid var(--line)}
  .intro-stat strong{margin-bottom:5px;font-size:clamp(29px,8vw,36px);line-height:1}
 }
 
+/* Match the editorial rhythm of the English page while giving RTL scripts room. */
+html[dir=rtl] h1,html[dir=rtl] h2{font-weight:500;line-height:1.35}
+html[dir=rtl] .hero-copy h1{font-weight:500}
+html[dir=rtl] .intro-inner>p{font-weight:500;line-height:1.5}
+html[dir=rtl] .about-text h2{font-size:clamp(43px,4.6vw,65px);font-weight:500;line-height:1.35}
+html[dir=rtl] .about-lead{font-size:18px;line-height:1.8}
+html[dir=rtl] .about-detail{font-size:14px;line-height:1.95}
+html[dir=rtl] .expertise-intro h2,html[dir=rtl] .section-heading h2{font-size:clamp(42px,4.2vw,62px);font-weight:500;line-height:1.35}
+html[dir=rtl] .expertise-row h3{font-size:clamp(26px,2.5vw,36px);font-weight:500;line-height:1.4}
+html[dir=rtl] .reach-intro h2{font-size:clamp(43px,4.5vw,65px);font-weight:500;line-height:1.35;letter-spacing:0}
+html[dir=rtl] .retail-feature-card strong{font-size:clamp(28px,2.8vw,38px);font-weight:500;line-height:1.4}
+html[dir=rtl] .retail-feature-card p{font-size:14px;line-height:1.8}
+html[dir=rtl] .contact h2{font-size:clamp(46px,5.3vw,76px);font-weight:500;line-height:1.35}
+html[dir=rtl] .route-label{font-size:clamp(27px,2.7vw,37px);font-weight:500;line-height:1.4}
+html[dir=rtl] .route-number{letter-spacing:0}
+html[dir=rtl] .route-value bdi{direction:ltr;unicode-bidi:isolate;overflow-wrap:anywhere}
+html[dir=rtl] .portfolio-info h3{font-family:Crafter,Georgia,serif;font-weight:400;line-height:1;letter-spacing:-.035em}
+html[dir=rtl] .portfolio-info p{font-size:15px;line-height:1.9}
+html[dir=rtl] .contact-socials{column-gap:24px}
+html[dir=rtl] .contact-socials a{font-size:13px}
+@media(max-width:640px){
+ html[dir=rtl] .intro-inner>p{font-size:clamp(22px,5.5vw,27px);line-height:1.5}
+ html[dir=rtl] .intro-stat{font-size:12px;line-height:1.55}
+ html[dir=rtl] .intro-stat strong{font:500 clamp(26px,7vw,34px)/1.2 Alexandria,Arial,sans-serif}
+ html[dir=rtl] .about-text h2{font-size:clamp(39px,9vw,52px)}
+ html[dir=rtl] .expertise-intro h2,html[dir=rtl] .section-heading h2,html[dir=rtl] .reach-intro h2{font-size:clamp(39px,9vw,52px)}
+ html[dir=rtl] .contact h2{font-size:clamp(40px,9vw,52px)}
+ html[dir=rtl] .retail-feature{height:auto;min-height:0;overflow:visible;background:transparent}
+ html[dir=rtl] .retail-feature>img{height:270px;object-fit:cover}
+ html[dir=rtl] .retail-feature-card{position:relative;inset:auto;max-width:none;margin:-25px 14px 0;padding:23px}
+ html[dir=rtl] .route-label{margin-top:20px}
+ html[dir=rtl] .contact-bottom .contact-socials{display:grid;grid-template-columns:1fr;gap:0;margin-top:18px}
+ html[dir=rtl] .contact-socials a{min-height:52px;border-bottom:1px solid #51444b}
+ html[dir=rtl] .contact-socials a:last-child{border-bottom:0}
+}
+
 /* Supplied portfolio artwork: keep every logo band at a comparable visual height. */
 .portfolio-carousel .logo-stage,.portfolio-carousel .partner-logo:first-child .logo-stage{position:relative;overflow:hidden;padding:0;background:#fff}
 .portfolio-carousel .logo-stage img,.portfolio-carousel .partner-logo:first-child .logo-stage img{position:absolute;inset:0;width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;transform:scale(var(--art-scale,1.25))}
