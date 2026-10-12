@@ -143,14 +143,6 @@ if (portfolioWall) {
     const index = document.createElement('div');
     index.className = 'brand-index';
     index.setAttribute('aria-label', words.list);
-    const mobilePicker = document.createElement('div');
-    mobilePicker.className = 'mobile-brand-picker';
-    const pickerLabel = document.createElement('label');
-    pickerLabel.htmlFor = 'portfolio-brand-select';
-    pickerLabel.textContent = words.list;
-    const pickerSelect = document.createElement('select');
-    pickerSelect.id = 'portfolio-brand-select';
-    mobilePicker.append(pickerLabel, pickerSelect);
     const stage = document.createElement('div');
     stage.className = 'portfolio-stage';
     const controls = document.createElement('div');
@@ -168,7 +160,7 @@ if (portfolioWall) {
     count.setAttribute('aria-live', 'polite');
     controls.append(previous, count, next);
     portfolioWall.before(carousel);
-    carousel.append(index, mobilePicker, stage);
+    carousel.append(index, stage);
     stage.append(portfolioWall, controls);
 
     let current = 0;
@@ -179,12 +171,8 @@ if (portfolioWall) {
       const button = document.createElement('button');
       button.type = 'button';
       button.textContent = name;
-      button.addEventListener('click', () => showBrand(position));
+      button.addEventListener('click', () => showBrand(position, true));
       index.append(button);
-      const option = document.createElement('option');
-      option.value = String(position);
-      option.textContent = name;
-      pickerSelect.append(option);
 
       const info = document.createElement('div');
       info.className = 'portfolio-info';
@@ -201,21 +189,24 @@ if (portfolioWall) {
       card.setAttribute('aria-label', `${position + 1} / ${cards.length}: ${name}`);
     });
 
-    function showBrand(position) {
+    function showBrand(position, keepTabVisible = false) {
       current = (position + cards.length) % cards.length;
       cards.forEach((card, i) => { card.hidden = i !== current; });
       [...index.children].forEach((button, i) => button.setAttribute('aria-current', String(i === current)));
-      pickerSelect.value = String(current);
       count.textContent = `${String(current + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
+      if (keepTabVisible && matchMedia('(max-width:640px)').matches) {
+        const tab = index.children[current];
+        const strip = index.getBoundingClientRect();
+        const selected = tab.getBoundingClientRect();
+        index.scrollBy({ left: selected.left - strip.left - (strip.width - selected.width) / 2, behavior: motionPreference.matches ? 'instant' : 'smooth' });
+      }
     }
-    pickerSelect.addEventListener('change', () => showBrand(Number(pickerSelect.value)));
-    previous.addEventListener('click', () => showBrand(current - 1));
-    next.addEventListener('click', () => showBrand(current + 1));
+    previous.addEventListener('click', () => showBrand(current - 1, true));
+    next.addEventListener('click', () => showBrand(current + 1, true));
     carousel.addEventListener('keydown', event => {
-      if (event.target === pickerSelect) return;
       if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
         event.preventDefault();
-        showBrand(current + (event.key === 'ArrowRight' ? 1 : -1) * (isArabic ? -1 : 1));
+        showBrand(current + (event.key === 'ArrowRight' ? 1 : -1) * (isArabic ? -1 : 1), true);
       }
     });
     showBrand(0);
