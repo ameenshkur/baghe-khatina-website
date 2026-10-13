@@ -165,40 +165,6 @@ if (portfolioWall) {
 
     let current = 0;
     const portfolioImages = cards.map(card => card.querySelector('.logo-stage img'));
-    const requestedImages = new Set();
-    function requestImage(position, priority = 'low') {
-      const image = portfolioImages[(position + cards.length) % cards.length];
-      if (!image) return;
-      if (priority === 'high' && image.fetchPriority !== 'high') image.fetchPriority = 'high';
-      if (requestedImages.has(image)) return;
-      requestedImages.add(image);
-      image.fetchPriority = priority;
-      image.loading = 'eager';
-    }
-    // Lazy images inside hidden slides may not start downloading until selected.
-    // Warm the carousel near the viewport, then fill the browser cache gradually.
-    function warmPortfolio() {
-      requestImage(current);
-      requestImage(current + 1);
-      let position = 2;
-      function warmNext() {
-        if (position >= cards.length) return;
-        requestImage(current + position++);
-        if ('requestIdleCallback' in window) requestIdleCallback(warmNext, { timeout: 1500 });
-        else setTimeout(warmNext, 150);
-      }
-      warmNext();
-    }
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver(entries => {
-        if (!entries[0].isIntersecting) return;
-        observer.disconnect();
-        warmPortfolio();
-      }, { rootMargin: '800px 0px' });
-      observer.observe(carousel);
-    } else {
-      window.addEventListener('load', warmPortfolio, { once: true });
-    }
     cards.forEach((card, position) => {
       const logo = card.querySelector('.logo-stage img');
       const description = card.querySelector('p');
@@ -226,8 +192,8 @@ if (portfolioWall) {
 
     function showBrand(position, keepTabVisible = false) {
       current = (position + cards.length) % cards.length;
-      requestImage(current, keepTabVisible ? 'high' : 'low');
-      requestImage(current + 1);
+      const activeImage = portfolioImages[current];
+      if (activeImage && keepTabVisible) activeImage.fetchPriority = 'high';
       cards.forEach((card, i) => { card.hidden = i !== current; });
       [...index.children].forEach((button, i) => button.setAttribute('aria-current', String(i === current)));
       count.textContent = `${String(current + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
