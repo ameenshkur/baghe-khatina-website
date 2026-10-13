@@ -165,6 +165,39 @@ if (portfolioWall) {
 
     let current = 0;
     const portfolioImages = cards.map(card => card.querySelector('.logo-stage img'));
+    const requestedImages = new Set();
+    function requestImage(position, priority = 'low') {
+      const image = portfolioImages[(position + cards.length) % cards.length];
+      if (!image) return;
+      if (priority === 'high' && image.fetchPriority !== 'high') image.fetchPriority = 'high';
+      if (requestedImages.has(image)) return;
+      requestedImages.add(image);
+      image.fetchPriority = priority;
+      image.loading = 'eager';
+    }
+    // Warm carousel images before visitors reach the animated slides.
+    function warmPortfolio() {
+      requestImage(current);
+      requestImage(current + 1);
+      let position = 2;
+      function warmNext() {
+        if (position >= cards.length) return;
+        requestImage(current + position++);
+        if ('requestIdleCallback' in window) requestIdleCallback(warmNext, { timeout: 1500 });
+        else setTimeout(warmNext, 150);
+      }
+      warmNext();
+    }
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        if (!entries[0].isIntersecting) return;
+        observer.disconnect();
+        warmPortfolio();
+      }, { rootMargin: '800px 0px' });
+      observer.observe(carousel);
+    } else {
+      window.addEventListener('load', warmPortfolio, { once: true });
+    }
     cards.forEach((card, position) => {
       const logo = card.querySelector('.logo-stage img');
       const description = card.querySelector('p');
@@ -192,8 +225,8 @@ if (portfolioWall) {
 
     function showBrand(position, keepTabVisible = false) {
       current = (position + cards.length) % cards.length;
-      const activeImage = portfolioImages[current];
-      if (activeImage && keepTabVisible) activeImage.fetchPriority = 'high';
+      requestImage(current, keepTabVisible ? 'high' : 'low');
+      requestImage(current + 1);
       cards.forEach((card, i) => { card.hidden = i !== current; });
       [...index.children].forEach((button, i) => button.setAttribute('aria-current', String(i === current)));
       count.textContent = `${String(current + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
@@ -214,6 +247,24 @@ if (portfolioWall) {
     });
     showBrand(0);
   }
+}
+
+// Start scroll-animated photos before they enter view so transforms and reveals
+// begin with decoded image pixels instead of an empty or partially loaded frame.
+const animatedImages = document.querySelectorAll(
+  '.hero-photo--filled img, .interlude-photo[src], [data-scroll-media] img'
+);
+if ('IntersectionObserver' in window) {
+  const animatedImageWarmup = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.loading = 'eager';
+      animatedImageWarmup.unobserve(entry.target);
+    });
+  }, { rootMargin: '1600px 0px' });
+  animatedImages.forEach(image => animatedImageWarmup.observe(image));
+} else {
+  animatedImages.forEach(image => { image.loading = 'eager'; });
 }
 
 // Reveal the existing scroll control after the visitor stays on the hero.
