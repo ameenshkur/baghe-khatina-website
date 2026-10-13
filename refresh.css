@@ -723,3 +723,8 @@ html[dir=rtl] .contact-socials a{font-size:13px}
 
 /* Stronger Kurdish text while retaining IBM Plex Sans Arabic. */
 html[lang=ckb] body{font-weight:500}
+
+/* One responsive vertical rhythm for every main content section. */
+:root{--section-padding:clamp(80px,8vw,128px)}
+.section-space,.expertise,.partners,.contact{padding-block:var(--section-padding)}
+@media(max-width:640px){:root{--section-padding:64px}}
