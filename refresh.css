@@ -576,6 +576,11 @@ html[lang=en] .hero-copy h1 em{font-style:normal}
 .retail-feature-card strong{font:400 35px/1.15 var(--display)}
 .retail-feature-card p{margin:12px 0 0;color:#675c60;font-size:13px;line-height:1.7}
 .retail-feature-card .text-link{display:inline-flex;margin-top:18px;font-size:12px}
+.retail-feature-card .text-link{transition:color .2s ease,border-color .2s ease}
+.retail-feature-card .text-link span{transition:transform .2s ease}
+.retail-feature-card .text-link:hover,.retail-feature-card .text-link:focus-visible{color:var(--wine);border-color:var(--wine)}
+.retail-feature-card .text-link:hover span,.retail-feature-card .text-link:focus-visible span{transform:translate(3px,-3px)}
+html[dir=rtl] .retail-feature-card .text-link:hover span,html[dir=rtl] .retail-feature-card .text-link:focus-visible span{transform:translate(-3px,-3px)}
 .contact-directory{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:64px}
 .contact-route{display:flex;flex-direction:column;min-height:230px;padding:28px;border:1px solid #6d5d65;color:#fff;text-decoration:none;transition:background .3s,transform .3s}
 .contact-route:hover{background:#3a2d35;transform:translateY(-4px)}
