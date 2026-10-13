@@ -757,3 +757,28 @@ p,h1,h2,h3,.route-label,.intro-stat,.contact-bottom span{ text-wrap:pretty; }
 /* Keep the secondary hero action in the site's deeper plum palette. */
 .hero-secondary{transition:color .2s ease,border-color .2s ease}
 .hero-secondary:hover,.hero-secondary:focus-visible{color:#6f3148;border-color:#6f3148}
+
+/* Carry the brand emphasis into both the card grid and the carousel. */
+.partner-logo p strong,.portfolio-info p strong{color:var(--wine);font-weight:700}
+
+/* Give Kurdish body copy more room to read at desktop and phone widths. */
+html[lang=ckb] .hero-description,html[lang=ckb] .about-detail,
+html[lang=ckb] .expertise-intro>p:last-child,html[lang=ckb] .expertise-row p,
+html[lang=ckb] .reach-intro>p:last-child,html[lang=ckb] .reach-figure p,
+html[lang=ckb] .section-heading>p,html[lang=ckb] .partner-logo p,
+html[lang=ckb] .portfolio-carousel .partner-logo .portfolio-info p,
+html[lang=ckb] .portfolio-carousel .partner-logo:first-child .portfolio-info p,
+html[lang=ckb] .retail-feature-card p,html[lang=ckb] .contact-intro>p:last-child{
+ font-size:18px;line-height:1.85;
+}
+html[lang=ckb] .about-lead{font-size:20px}
+@media(max-width:640px){
+ html[lang=ckb] .hero-description,html[lang=ckb] .about-detail,
+ html[lang=ckb] .expertise-intro>p:last-child,html[lang=ckb] .expertise-row p,
+ html[lang=ckb] .reach-intro>p:last-child,html[lang=ckb] .reach-figure p,
+ html[lang=ckb] .section-heading>p,html[lang=ckb] .partner-logo p,
+ html[lang=ckb] .portfolio-carousel .partner-logo .portfolio-info p,
+ html[lang=ckb] .portfolio-carousel .partner-logo:first-child .portfolio-info p,
+ html[lang=ckb] .retail-feature-card p,html[lang=ckb] .contact-intro>p:last-child{font-size:17px}
+ html[lang=ckb] .about-lead{font-size:19px}
+}
