@@ -733,3 +733,27 @@ html[lang=ckb] body{font-weight:500}
 :root{--section-padding:clamp(80px,8vw,128px)}
 .section-space,.expertise,.partners,.contact{padding-block:var(--section-padding)}
 @media(max-width:640px){:root{--section-padding:64px}}
+
+/* Readable body copy and consistent line endings across all three languages. */
+p,h1,h2,h3,.route-label,.intro-stat,.contact-bottom span{ text-wrap:pretty; }
+.hero-description,.about-detail,.expertise-intro>p:last-child,.expertise-row p,
+.reach-intro>p:last-child,.reach-figure p,.section-heading>p,
+.portfolio-info p,.retail-feature-card p,.contact-intro>p:last-child{
+ font-size:clamp(16px,1.15vw,18px);line-height:1.75;
+}
+.expertise-row p{max-width:370px;min-height:3lh;margin-top:20px}
+.expertise-row .row-index{font-family:Crafter,Georgia,serif;font-size:clamp(22px,2.2vw,30px);font-weight:400;line-height:1}
+.intro-stat strong,.reach-number{font-family:Crafter,Georgia,serif}
+.about-detail strong,.expertise-intro strong{color:var(--wine);font-weight:700}
+.hero-foot span:last-child{display:inline}
+@media(max-width:640px){
+ html[dir=rtl] .intro-stat strong{font-family:Crafter,Georgia,serif;font-weight:400}
+ .expertise-row p{min-height:0}
+ .hero-description,.about-detail,.expertise-intro>p:last-child,.expertise-row p,
+ .reach-intro>p:last-child,.reach-figure p,.section-heading>p,
+ .portfolio-info p,.retail-feature-card p,.contact-intro>p:last-child{font-size:16px}
+}
+
+/* Keep the secondary hero action in the site's deeper plum palette. */
+.hero-secondary{transition:color .2s ease,border-color .2s ease}
+.hero-secondary:hover,.hero-secondary:focus-visible{color:#6f3148;border-color:#6f3148}
