@@ -772,6 +772,7 @@ html[lang=ckb] .retail-feature-card p,html[lang=ckb] .contact-intro>p:last-child
  font-size:18px;line-height:1.85;
 }
 html[lang=ckb] .about-lead{font-size:20px}
+html[lang=ckb] .expertise-row h3{font-size:clamp(26px,2.1vw,32px);line-height:1.4}
 @media(max-width:640px){
  html[lang=ckb] .hero-description,html[lang=ckb] .about-detail,
  html[lang=ckb] .expertise-intro>p:last-child,html[lang=ckb] .expertise-row p,
@@ -781,6 +782,7 @@ html[lang=ckb] .about-lead{font-size:20px}
  html[lang=ckb] .portfolio-carousel .partner-logo:first-child .portfolio-info p,
  html[lang=ckb] .retail-feature-card p,html[lang=ckb] .contact-intro>p:last-child{font-size:17px}
  html[lang=ckb] .about-lead{font-size:19px}
+ html[lang=ckb] .expertise-row h3{font-size:clamp(24px,6.2vw,29px);line-height:1.4}
 }
 
 /* Highlight the three business labels in the body font for each script. */
