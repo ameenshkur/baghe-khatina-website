@@ -783,6 +783,7 @@ html[lang=ckb] .about-lead{font-size:20px}
  html[lang=ckb] .about-lead{font-size:19px}
 }
 
-/* Give the three business labels the same editorial voice as the headings. */
-.intro-stat{font-family:var(--display);font-size:clamp(17px,1.35vw,20px);font-weight:500;line-height:1.45}
-@media(max-width:640px){.intro-stat,html[dir=rtl] .intro-stat{font-size:clamp(14px,3.6vw,16px);line-height:1.5}}
+/* Highlight the three business labels in the body font for each script. */
+.intro-stat{font-family:Alexandria,Arial,sans-serif;font-size:clamp(16px,1.2vw,18px);font-weight:650;line-height:1.5;color:var(--wine)}
+html[lang=ckb] .intro-stat{font-family:'IBM Plex Sans Arabic','Noto Sans Arabic',sans-serif;font-weight:600}
+@media(max-width:640px){.intro-stat,html[dir=rtl] .intro-stat{font-size:clamp(14px,3.4vw,16px);line-height:1.5}}
