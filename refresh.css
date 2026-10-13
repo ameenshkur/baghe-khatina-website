@@ -647,7 +647,7 @@ html[lang=en] .partners .own-logo{min-height:170px;border:1px solid var(--line)}
  .intro-stat{padding-inline-start:14px}
  .about-feature{grid-template-columns:1fr;gap:30px}
  .about-photo{aspect-ratio:4/3}
- .about-photo img{object-position:center top}
+ .about-photo img{object-position:center 20%}
  .about-text h2{font-size:clamp(48px,11vw,66px)}
  .about-detail{grid-template-columns:1fr;gap:15px;margin-top:30px}
  .portfolio-carousel{grid-template-columns:1fr}
