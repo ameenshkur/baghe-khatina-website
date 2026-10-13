@@ -720,3 +720,6 @@ html[dir=rtl] .contact-socials a{font-size:13px}
 .portfolio-carousel .logo-kezy{--art-scale:1.48}
 .portfolio-carousel .logo-urban-care{--art-scale:1.25}
 .portfolio-carousel .logo-paris-bleu{--art-scale:1.21}
+
+/* Stronger Kurdish text while retaining IBM Plex Sans Arabic. */
+html[lang=ckb] body{font-weight:500}
