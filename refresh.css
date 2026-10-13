@@ -782,3 +782,7 @@ html[lang=ckb] .about-lead{font-size:20px}
  html[lang=ckb] .retail-feature-card p,html[lang=ckb] .contact-intro>p:last-child{font-size:17px}
  html[lang=ckb] .about-lead{font-size:19px}
 }
+
+/* Give the three business labels the same editorial voice as the headings. */
+.intro-stat{font-family:var(--display);font-size:clamp(17px,1.35vw,20px);font-weight:500;line-height:1.45}
+@media(max-width:640px){.intro-stat,html[dir=rtl] .intro-stat{font-size:clamp(14px,3.6vw,16px);line-height:1.5}}
