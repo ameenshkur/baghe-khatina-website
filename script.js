@@ -64,6 +64,10 @@ document.addEventListener('keydown', event => {
 
 // One predictable entrance system across all three language pages.
 const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+// Keep wheel scrolling gentle; touch scrolling stays native and reduced motion is honored by Lenis.
+if (window.Lenis) {
+  new Lenis({ autoRaf: true, lerp: 0.14, anchors: true, stopInertiaOnNavigate: true });
+}
 if (!motionPreference.matches && 'IntersectionObserver' in window) {
   document.documentElement.classList.add('motion-ready');
   const revealObserver = new IntersectionObserver(entries => {

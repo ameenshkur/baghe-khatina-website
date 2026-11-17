@@ -8,6 +8,7 @@
 :root{--ink:#252323;--muted:#6d6767;--paper:#faf9f6;--white:#fff;--line:#dedad4;--accent:#c42c74;--display:Onest,Arial,sans-serif;--content:1280px;--ease:cubic-bezier(.2,.7,.2,1)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
+html.lenis{scroll-behavior:auto}
 body{margin:0;background:var(--paper);color:var(--ink);font:400 14px/1.9 Alexandria,Arial,sans-serif;-webkit-font-smoothing:antialiased}
 html[dir=rtl]{--display:Alexandria,Arial,sans-serif}
 html[lang=ckb]{--display:'IBM Plex Sans Arabic','Noto Sans Arabic',sans-serif}
