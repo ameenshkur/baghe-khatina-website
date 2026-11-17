@@ -157,6 +157,7 @@ html[dir=rtl] .slot-index,html[dir=rtl] .slot-spec{text-transform:none;letter-sp
 .site-footer{background:#fff}
 .footer-bottom{color:#555}
 
+
 @media(max-width:820px){
  .hero-copy{max-width:50%}
  .hero-copy h1{font-size:clamp(48px,6.2vw,68px)}
@@ -795,3 +796,13 @@ html[lang=ckb] .expertise-row h3{font-size:clamp(26px,2.1vw,32px);line-height:1.
 .intro-stat{font-family:Alexandria,Arial,sans-serif;font-size:clamp(16px,1.2vw,18px);font-weight:650;line-height:1.5;color:var(--wine)}
 html[lang=ckb] .intro-stat{font-family:'IBM Plex Sans Arabic','Noto Sans Arabic',sans-serif;font-weight:600}
 @media(max-width:640px){.intro-stat,html[dir=rtl] .intro-stat{font-size:clamp(14px,3.4vw,16px);line-height:1.5}}
+
+/* Let the phone hero follow its content instead of reserving a fixed-height blank area. */
+@media(max-width:560px){
+ .hero{display:flex;flex-direction:column;align-items:stretch;min-height:0}
+ .hero-content{order:0;width:calc(100% - 42px);padding-block:48px 36px}
+ .hero-photo{order:1;position:relative;inset:auto;z-index:0;flex:none;height:clamp(230px,70vw,360px)}
+ .hero-photo--filled img{inset:0;width:100%;height:100%;margin:0;transform:none;object-position:center 44%}
+ html.motion-ready .hero-photo--filled img,html[dir=rtl].motion-ready .hero-photo--filled img{transform-origin:center bottom;animation-name:hero-photo-arrive-mobile}
+ @keyframes hero-photo-arrive-mobile{from{clip-path:inset(100% 0 0 0);scale:1.035}to{clip-path:inset(0 0 0 0);scale:1}}
+}
